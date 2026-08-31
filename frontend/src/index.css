@@ -1,0 +1,11 @@
+
+@import "tailwindcss";
+
+@theme {
+    --spacing: 1px;
+}
+
+@theme inline {
+    /*Tones*/
+}
+
