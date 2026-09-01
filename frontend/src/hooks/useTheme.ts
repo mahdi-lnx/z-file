@@ -10,7 +10,7 @@ export const useTheme = () => {
     const theme = useContext(Theme);
 
     if(theme === null){
-        throw new Error("useTheme could not find a LocalStorageProvider ancestor");
+        throw new Error("useTheme could not find a ThemeProvider ancestor");
     }
 
     return theme;
