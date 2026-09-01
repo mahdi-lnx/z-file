@@ -7,8 +7,13 @@ import { cn } from "../../utils/general"
 
 type Theme = "light" | "dark";
 
+type ThemeContextValue = {
+    theme: Theme;
+    setTheme: (newTheme: Theme) => void;
+};
 
-export const Theme = createContext<Theme | null>(null);
+
+export const Theme = createContext<ThemeContextValue | null>(null);
 
 
 /**
@@ -34,9 +39,14 @@ export const ThemeProvider = (
 
     const finalTheme: Theme = userCustomTheme ?? matches ? "dark" : "light";
 
+    const setTheme = (newTheme: Theme): void => storage.setItem("theme", newTheme);
+
     return (
         <div className={cn(finalTheme)}>
-            <Theme value={finalTheme}>
+            <Theme value={{
+                theme: finalTheme,
+                setTheme,
+            }}>
                 { children }
             </Theme>
         </div>
