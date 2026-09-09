@@ -9,12 +9,12 @@
  * Consumers are able to pass false values when working with conditionals.
  * Any false value will be skipped  
  */
-export const cn = (...classNames: (string | false)[]): string => {
+export const cn = (...classNames: (string | false | undefined | null)[]): string => {
 
     let finalClassName: string = "";
 
     for(let className of classNames){
-        if(className === false){
+        if(!className){
             continue;
         }
         finalClassName += className.trim() + " ";
