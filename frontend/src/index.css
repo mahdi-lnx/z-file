@@ -1,11 +1,27 @@
 
 @import "tailwindcss";
 
+:root{
+    --focus-visible-outline-color: var(--color-cyan-400);
+    --focus-visible-outline-width: 3px;
+    --focus-visible-outline-offset: 2.5px;
+}
+
 @theme {
     --spacing: 1px;
 }
 
 @theme inline {
+
     /*Tones*/
+    --color-light: var(--color-stone-50);
+    --color-dark: var(--color-stone-950);
+    --color-light-mute: var(--color-mist-400);
+    --color-dark-mute: var(--color-mist-500);
+    --color-info: var(--color-emerald-500);
+    --color-success: var(--color-green-500);
+    --color-accent: var(--color-blue-600);
+    --color-warning: var(--color-amber-600);
+    --color-danger: var(--color-rose-600);
 }
 
