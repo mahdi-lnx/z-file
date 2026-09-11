@@ -5,6 +5,19 @@
     --focus-visible-outline-color: var(--color-cyan-400);
     --focus-visible-outline-width: 3px;
     --focus-visible-outline-offset: 2.5px;
+
+    /*Gradients*/
+
+    --gradient-soft-neutral: linear-gradient(
+        to bottom right, 
+        var(--color-neutral-100), 
+        var(--color-stone-100)
+    );
+    --gradient-dark-olive: linear-gradient(
+        to bottom right,
+        var(--color-olive-900),
+        var(--color-zinc-900)
+    );
 }
 
 @theme {
