@@ -79,6 +79,7 @@ export const AppLink = (props: AppLinkProps): ReactElement => {
         const finalClassName = (renderProps: NavLinkRenderProps): string => cn( 
             isDisabled && "cursor-not-allowed",
             selectedVariant,
+            "focus-visible-ring",
             tones[ 
                 tone?.(renderProps) ?? 
                 (renderProps.isActive ? "accent" : "auto")
@@ -106,6 +107,7 @@ export const AppLink = (props: AppLinkProps): ReactElement => {
             ...linkProps,
             className: cn(
                 isDisabled && "cursor-not-allowed",
+                "focus-visible-ring",
                 linkProps.className, 
                 selectedVariant, 
                 tones[tone ?? "auto"]
@@ -126,6 +128,7 @@ export const AppLink = (props: AppLinkProps): ReactElement => {
         ...linkProps,
         className: cn( 
             isDisabled && "cursor-not-allowed",
+            "focus-visible-ring",
             linkProps.className, 
             selectedVariant, 
             tones[tone ?? "auto"]

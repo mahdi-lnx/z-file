@@ -1,12 +1,16 @@
 
 @import "tailwindcss";
 
+
 :root{
+    /*focus-visible tokens*/
+
     --focus-visible-outline-color: var(--color-cyan-400);
     --focus-visible-outline-width: 3px;
     --focus-visible-outline-offset: 2.5px;
 
-    /*Gradients*/
+
+    /*gradients*/
 
     --gradient-soft-neutral: linear-gradient(
         to bottom right, 
@@ -20,9 +24,19 @@
     );
 }
 
+
+@utility focus-visible-ring {
+   &:focus-visible {
+        outline: solid var(--focus-visible-outline-width) var(--focus-visible-outline-color); 
+        outline-offset: var(--focus-visible-outline-offset); 
+    } 
+}
+
+
 @theme {
     --spacing: 1px;
 }
+
 
 @theme inline {
 
