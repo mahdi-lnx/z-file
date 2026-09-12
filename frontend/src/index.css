@@ -12,16 +12,12 @@
 
     /*gradients*/
 
-    --gradient-soft-neutral: linear-gradient(
-        to bottom right, 
-        var(--color-neutral-100), 
-        var(--color-stone-100)
-    );
-    --gradient-dark-olive: linear-gradient(
-        to bottom right,
-        var(--color-olive-900),
-        var(--color-zinc-900)
-    );
+    --gradient-soft-neutral: linear-gradient(to bottom right, var(--color-neutral-100), var(--color-stone-100));
+    --gradient-dark-olive: linear-gradient(to bottom right, var(--color-olive-900), var(--color-zinc-900));
+
+    /*z-scales*/
+    --z-app-header: 10;
+    --z-mobile-nav-drawer: 20;
 }
 
 
