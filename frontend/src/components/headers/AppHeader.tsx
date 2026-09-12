@@ -29,6 +29,7 @@ export const AppHeader = (
             "bg-(image:--gradient-soft-neutral)",
             "shadow-xs",
             "shadow-mist-400",
+            "z-(--z-app-header)",
             "dark:shadow-none",
             "dark:bg-(image:--gradient-dark-olive)",
             "md:p-17",
