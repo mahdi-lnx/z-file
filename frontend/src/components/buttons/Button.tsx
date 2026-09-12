@@ -3,20 +3,44 @@ import type { ButtonHTMLAttributes, ReactElement, ReactNode } from "react"
 import { cn } from "../../utils/general.ts"
 
 
+type ButtonVariants = {
+    primary: string;
+    secondary: string;
+    danger: string;
+    lightGhost: string;
+    darkGhost: string;
+};
+
+type ButtonSizes = {
+    sm: string;
+    base: string;
+    lg: string;
+    xl: string;
+    "2xl": string;
+    "3xl": string;
+};
+
+type ButtonShapes = {
+    rounded: string;
+    pill: string;
+    sharp: string;
+};
+
 export type ButtonProps = {
-    variant?: "primary" | "secondary" | "danger" | "lightGhost" | "darkGhost";
-    size?: "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
-    shape?: "rounded" | "pill" | "sharp";
+    variant?: keyof ButtonVariants;
+    size?: keyof ButtonSizes;
+    shape?: keyof ButtonShapes;
     className?: string;
     children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
+
 
 
 export const Button = ({ 
     variant="primary", size="lg", shape="rounded", className="", children, ...props
 }: ButtonProps): ReactElement => {
 
-    const variants = {
+    const variants: ButtonVariants = {
         primary: cn(
             "text-light",
             "bg-blue-700",
@@ -63,7 +87,7 @@ export const Button = ({
         ), 
     }
 
-    const sizes = {
+    const sizes: ButtonSizes = {
         sm: cn("py-4 px-7 text-sm"),
         base: cn("py-4 px-7 text-base"),
         lg: cn("py-5 px-8 text-lg"),
@@ -72,7 +96,7 @@ export const Button = ({
         "3xl": cn("py-8 px-11 text-3xl"),
     };
 
-    const shapes = {
+    const shapes: ButtonShapes = {
         rounded: cn("rounded-md"),
         pill: cn("rounded-full"),
         sharp: cn("rounded-none"),
