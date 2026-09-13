@@ -11,7 +11,7 @@ type ButtonVariants = {
     darkGhost: string;
 };
 
-type ButtonSizes = {
+export type ButtonSizes = {
     sm: string;
     base: string;
     lg: string;
@@ -30,7 +30,6 @@ export type ButtonProps = {
     variant?: keyof ButtonVariants;
     size?: keyof ButtonSizes;
     shape?: keyof ButtonShapes;
-    className?: string;
     children: ReactNode;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
