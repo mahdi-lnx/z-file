@@ -1,6 +1,7 @@
 
 import type { ButtonHTMLAttributes, ReactElement } from "react"
 import { cn } from "../../utils/general.ts"
+import type { ButtonSizes } from "./Button.tsx";
 
 
 type HamburgerButtonTones = {
@@ -9,11 +10,7 @@ type HamburgerButtonTones = {
     dark: string;
 };
 
-type HamburgerButtonSizes = {
-    sm: string;
-    base: string;
-    lg: string;
-};
+type HamburgerButtonSizes = Pick<ButtonSizes, "sm" | "base" | "lg">;
 
 type HamburgerButton = {
     isOpen?: boolean;
