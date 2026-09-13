@@ -1,5 +1,6 @@
 
-import { AppLink, type AppLinkProps } from "./AppLink"
+import type { ReactElement } from "react";
+import { AppLink, type AppLinkProps } from "./AppLink.tsx"
 
 
 export type NavProps = {
@@ -18,7 +19,7 @@ export type NavProps = {
  */
 export const Nav = ({ 
     links, className={ nav: "", ul: "", li: "", },
-}: NavProps) => {
+}: NavProps): ReactElement => {
 
     return (
         <nav className={className.nav}>
