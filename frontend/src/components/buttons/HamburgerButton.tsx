@@ -12,7 +12,7 @@ type HamburgerButtonTones = {
 
 type HamburgerButtonSizes = Pick<ButtonSizes, "sm" | "base" | "lg">;
 
-type HamburgerButton = {
+export type HamburgerButtonProps = {
     isOpen?: boolean;
     tone?: keyof HamburgerButtonTones;
     size?: keyof HamburgerButtonSizes; 
@@ -22,7 +22,7 @@ type HamburgerButton = {
 export const HamburgerButton = ({
     isOpen=false, tone="auto", size="base", className="", ...props
     
-}: HamburgerButton): ReactElement => {
+}: HamburgerButtonProps): ReactElement => {
 
     const tones: HamburgerButtonTones = {
         auto: cn(
@@ -74,7 +74,6 @@ export const HamburgerButton = ({
                 <span key={i} className={cn(
                     "rounded-sm",
                     "transition-[opacity,rotate,translate]",
-                    "duration-300",
                     "ease-in-out",
                     isOpen && "nth-2:opacity-0",
                     selectedTone,
