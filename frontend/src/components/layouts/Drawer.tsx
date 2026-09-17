@@ -1,5 +1,5 @@
 
-import type { ReactElement } from "react"
+import type { ReactNode, ReactElement } from "react"
 import type { DrawerController } from "../../hooks/useDrawer.ts"
 import { cn } from "../../utils/general.ts";
 
@@ -13,7 +13,7 @@ type DrawerProps = {
     controller: DrawerController;
     side?: keyof DrawerSides;
     backdropZIndexClass: string;
-    children: ReactElement;
+    children: ReactNode;
     className?: string;
 };
 
