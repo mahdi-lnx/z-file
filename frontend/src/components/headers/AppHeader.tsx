@@ -11,18 +11,19 @@ type AppHeaderProps = {
         as?: "h1" | "span";
     };
     children?: ReactNode;
+    className?: string;
 };
 
 
 export const AppHeader = (
-    { logo: { to, as="h1" }, children, }: AppHeaderProps
+    { logo: { to, as="h1" }, children, className="" }: AppHeaderProps
 ): ReactElement => {
 
     const Tag = as;
 
     return (
         <header className={cn(
-            "p-7",
+            "p-11",
             "flex",
             "justify-center",
             "bg-linear-to-br",
@@ -34,6 +35,7 @@ export const AppHeader = (
             "dark:bg-(image:--gradient-dark-olive)",
             "md:p-17",
             "md:justify-between",
+            className,
         )}>
             <Tag>
                 <AppLink as="Link" to={to} variant="custom" className={cn(
