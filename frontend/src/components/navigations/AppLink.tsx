@@ -38,8 +38,8 @@ export type AppLinkProps =
 export const AppLink = (props: AppLinkProps): ReactElement => {
 
     const variants: AppLinkVariant = {
-        pageNavigation: cn("text-2xl", "font-medium"),
-        sectionNavigation: cn("text-xl", "font-normal"),
+        pageNavigation: cn("text-xl", "font-medium"),
+        sectionNavigation: cn("text-[19px]", "font-normal"),
         inline: cn("font-medium"), // font-size is auto inheritied
         custom: cn(""), // an escape hatch
     };
