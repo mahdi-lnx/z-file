@@ -14,6 +14,8 @@
 
     --gradient-soft-neutral: linear-gradient(to bottom right, var(--color-neutral-100), var(--color-stone-100));
     --gradient-dark-olive: linear-gradient(to bottom right, var(--color-olive-900), var(--color-zinc-900));
+    --gradient-white-linen: linear-gradient(to bottom right, #fdfcfb, #e2d1c3);
+    --gradient-premium-black: linear-gradient(to bottom right, var(--color-zinc-900), var(--color-zinc-950));
 
     /*z-scales*/
     --z-app-header: 10;
@@ -31,6 +33,9 @@
 
 @theme {
     --spacing: 1px;
+
+    --breakpoint-2xs: 25rem; /*400px*/
+    --breakpoint-xs: 31.25rem /*500px*/
 }
 
 
