@@ -1,7 +1,7 @@
 
 import type { AnchorHTMLAttributes, MouseEvent, ReactElement, ReactNode } from "react"
 import { NavLink, Link, type LinkProps, type NavLinkProps, type NavLinkRenderProps } from "react-router"
-import { cn } from "../../utils/general"
+import { cn } from "../../utils/general.ts"
 
 
 type AppLinkVariant = {
@@ -38,9 +38,9 @@ export type AppLinkProps =
 export const AppLink = (props: AppLinkProps): ReactElement => {
 
     const variants: AppLinkVariant = {
-        pageNavigation: cn("text-xl", "font-medium"),
-        sectionNavigation: cn("text-[19px]", "font-normal"),
-        inline: cn("font-medium"), // font-size is auto inheritied
+        pageNavigation: cn("text-xl", "font-medium", "hover:underline"),
+        sectionNavigation: cn("text-[19px]", "font-normal", "hover:underline"),
+        inline: cn("font-medium", "hover:underline"), // font-size is auto inheritied
         custom: cn(""), // an escape hatch
     };
 
@@ -50,19 +50,26 @@ export const AppLink = (props: AppLinkProps): ReactElement => {
         auto: cn(
             !isDisabled ? "text-dark" : "text-dark/90",
             !isDisabled ? "dark:text-light" : "dark:text-light/90",
+            "active:text-dark/95",
+            "dark:active:text-light/95",
         ),
         light: cn(
             !isDisabled ? "text-light" : "text-light/90",
+            "active:text-light/95",
         ),
         dark: cn(
             !isDisabled ? "text-dark" : "dark:text-dark/90",
+            "active:text-dark/95",
         ),
         accent: cn(
             !isDisabled ? "text-accent" : "text-accent/90",
+            "active:text-accent/95",
         ),
         mute: cn(
             !isDisabled ? "text-dark-mute" : "text-dark-mute/90",
             !isDisabled ? "dark:text-light-mute" : "dark:text-light-mute/90",
+            "active:text-dark-mute/95",
+            "dark:active:text-light-mute/95",
         ),
     };
 
