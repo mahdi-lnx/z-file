@@ -99,6 +99,7 @@ export const Input = ({
             )}>
                 <input className={cn(
                     "outline-0",
+                    "bg-transparent",
                 )} {...props}/>
 
                 { endElement }
