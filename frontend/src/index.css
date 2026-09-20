@@ -13,7 +13,9 @@
     /*gradients*/
 
     --gradient-soft-neutral: linear-gradient(to bottom right, var(--color-neutral-100), var(--color-stone-100));
+    --gradient-soft-neutral-inverted: linear-gradient(to bottom right, var(--color-stone-100), var(--color-neutral-100));
     --gradient-dark-olive: linear-gradient(to bottom right, var(--color-olive-900), var(--color-zinc-900));
+    --gradient-inverted-dark-olive: linear-gradient(to bottom right, var(--color-zinc-900), var(--color-olive-900));
     --gradient-white-linen: linear-gradient(to bottom right, #fdfcfb, #e2d1c3);
     --gradient-premium-black: linear-gradient(to bottom right, var(--color-zinc-900), var(--color-zinc-950));
 
