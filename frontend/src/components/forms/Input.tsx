@@ -10,12 +10,6 @@ export type InputSizes = {
     xl: string;
 };
 
-type InputTones = {
-    auto: string;
-    light: string;
-    dark: string;
-};
-
 type InputShapes = {
     rounded: string;
     pill: string;
@@ -24,45 +18,17 @@ type InputShapes = {
 
 export type InputProps = {
     inputSize?: keyof InputSizes; // we chose this name to avoid conflicting with the native size attribute
-    tone?: keyof InputTones;
     shape?: keyof InputShapes;
     isUsed?: boolean;
     isValid?: boolean | null;
-    endElement?: ReactElement;
+    endElement?: ReactElement; // used for inputs that have elements inside of them like a Show/Hide password Input
 } & InputHTMLAttributes<HTMLInputElement>;
 
 
 export const Input = ({
-    inputSize="base", tone="auto", shape="rounded",
+    inputSize="base", shape="rounded",
     isUsed=false, isValid=null, endElement, className, ...props
 }: InputProps): ReactElement => {
-
-    const tones: InputTones = {
-        auto: cn(
-            "text-dark",
-            "bg-amber-50",
-            "dark:bg-mauve-900",
-            "dark:text-light",
-            !isUsed && "border-amber-950",
-            !isUsed && "dark:border-mauve-700",
-            isUsed && isValid && "border-success",
-            isUsed && !isValid && "border-danger"
-        ),
-        light: cn(
-            "text-dark",
-            "bg-amber-50",
-            !isUsed && "border-amber-950",
-            isUsed && isValid && "border-success",
-            isUsed && !isValid && "border-danger",
-        ),
-        dark: cn(
-            "text-light",
-            "bg-mauve-900",
-            !isUsed && "border-mauve-700",
-            isUsed && isValid && "border-success",
-            isUsed && !isValid && "border-danger",
-        ),
-    };
 
     const inputShapes: InputShapes = {
         sharp: cn(
@@ -104,8 +70,17 @@ export const Input = ({
     };
 
     const selectedSize = sizes[inputSize];
-    const selectedTone = tones[tone];
     const selectedShape = inputShapes[shape];
+    const tone = cn( 
+        "text-dark",
+        "bg-amber-50",
+        "dark:bg-mauve-900",
+        "dark:text-light",
+        !isUsed && "border-amber-950",
+        !isUsed && "dark:border-mauve-700",
+        isUsed && isValid === true && "border-success",
+        isUsed && isValid === false && "border-danger"
+    );
 
     if(endElement){
         return (
@@ -114,9 +89,10 @@ export const Input = ({
                 "border-3",
                 "has-[input:focus]:border-blue-700", 
                 "focus-visible:border-accent",
-                "disabled:cursor-not-allowed",
-                "disabled:opacity-70",
-                selectedTone,
+                "has-disabled:cursor-not-allowed",
+                "has-disabled:opacity-70",
+                "has-disabled:pointer-events-none",
+                tone,
                 selectedSize,
                 selectedShape,
                 className,
@@ -138,7 +114,7 @@ export const Input = ({
             "focus-visible:border-accent",
             "disabled:cursor-not-allowed",
             "disabled:opacity-70",
-            selectedTone,
+            tone,
             selectedSize,
             selectedShape,
             className,
