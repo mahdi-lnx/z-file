@@ -5,8 +5,11 @@ import { Outlet } from "react-router"
 import { AppHeader } from "../headers/AppHeader.tsx"
 import { MobileNavDrawer } from "../navigations/MobileNavDrawer.tsx"
 import { TopNavBar } from "../navigations/TopNavBar.tsx"
+import { AppFooter } from "../footers/AppFooter.tsx"
 import { cn } from "../../utils/general.ts"
 import { useMatchMedia } from "../../hooks/useMatchMedia.ts"
+import { config } from "../../config.ts";
+import { Heading } from "../typography/Heading.tsx";
 
 
 export const PublicLayout = (): ReactElement => {
@@ -44,6 +47,57 @@ export const PublicLayout = (): ReactElement => {
             <main>
                 <Outlet/>
             </main>
+
+            <AppFooter>
+                <section className={cn(
+                    "my-17",
+                    "px-17",
+                    "grid",
+                    "md:grid-cols-[1fr_1fr]",
+                    "gap-27"
+                )}>
+                    <div>
+                        <Heading as="h2" variant="section" className={cn(
+                            "mb-9",
+                            "capitalize",
+                            "md:text-center",
+                        )}>
+                            Subscribe to our mailing list!
+                        </Heading>
+                    </div>
+
+                    <div>
+                        <Heading as="h2" variant="section" className={cn(
+                            "mb-9",
+                            "md:text-center",
+                        )}>
+                            Contact
+                        </Heading>
+                        <address>
+                            <span className={cn(
+                                "font-normal"
+                            )}> 
+                                Phone Number: 
+                            </span> 
+                            &nbsp; { config.company.phoneNumber }<br/>
+
+                            <span className={cn(
+                                "font-normal",
+                            )}> 
+                                Address: 
+                            </span>
+                            &nbsp; { config.company.address }<br/>
+
+                            <span className={cn(
+                                "font-normal",
+                            )}>
+                                Hours: 
+                            </span> 
+                            &nbsp; { config.company.hours }
+                        </address>
+                    </div>
+                </section>
+            </AppFooter>
         </div>
     );
 }
