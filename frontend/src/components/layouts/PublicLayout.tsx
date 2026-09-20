@@ -6,10 +6,10 @@ import { AppHeader } from "../headers/AppHeader.tsx"
 import { MobileNavDrawer } from "../navigations/MobileNavDrawer.tsx"
 import { TopNavBar } from "../navigations/TopNavBar.tsx"
 import { AppFooter } from "../footers/AppFooter.tsx"
+import { Heading } from "../typography/Heading.tsx"
 import { cn } from "../../utils/general.ts"
 import { useMatchMedia } from "../../hooks/useMatchMedia.ts"
-import { config } from "../../config.ts";
-import { Heading } from "../typography/Heading.tsx";
+import { config } from "../../config.ts"
 
 
 export const PublicLayout = (): ReactElement => {
