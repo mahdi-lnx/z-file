@@ -19,7 +19,7 @@ type InputShapes = {
 export type InputProps = {
     inputSize?: keyof InputSizes; // we chose this name to avoid conflicting with the native size attribute
     shape?: keyof InputShapes;
-    isUsed?: boolean;
+    isDirty?: boolean;
     isValid?: boolean | null;
     endElement?: ReactElement; // used for inputs that have elements inside of them like a Show/Hide password Input
 } & InputHTMLAttributes<HTMLInputElement>;
@@ -27,7 +27,7 @@ export type InputProps = {
 
 export const Input = ({
     inputSize="base", shape="rounded",
-    isUsed=false, isValid=null, endElement, className, ...props
+    isDirty=false, isValid=null, endElement, className, ...props
 }: InputProps): ReactElement => {
 
     const inputShapes: InputShapes = {
@@ -76,10 +76,10 @@ export const Input = ({
         "bg-amber-50",
         "dark:bg-mauve-900",
         "dark:text-light",
-        !isUsed && "border-amber-950",
-        !isUsed && "dark:border-mauve-700",
-        isUsed && isValid === true && "border-success",
-        isUsed && isValid === false && "border-danger"
+        !isDirty && "border-amber-950",
+        !isDirty && "dark:border-mauve-700",
+        isDirty && isValid === true && "border-success",
+        isDirty && isValid === false && "border-danger"
     );
 
     if(endElement){
