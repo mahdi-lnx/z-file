@@ -4,18 +4,18 @@ import type { InputSizes } from "./Input.tsx"
 import { cn } from "../../utils/general.ts"
 
 
-export type InputWarningSizes = InputSizes
+type InputErrorSizes = InputSizes
 
-type InputWarningProps = {
-    size?: keyof InputWarningSizes;
+export type InputErrorProps = {
+    size?: keyof InputErrorSizes;
 } & HTMLAttributes<HTMLParagraphElement>;
 
 
-export const InputWarning = ({
+export const InputError = ({
     size="base", className, children, ...props
-}: InputWarningProps) => {
+}: InputErrorProps) => {
 
-    const sizes: InputWarningSizes = {
+    const sizes: InputErrorSizes = {
         sm: cn(
             "text-sm",
         ),
