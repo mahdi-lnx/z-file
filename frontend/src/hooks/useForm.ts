@@ -1,57 +1,6 @@
 
-import { useState } from "react"
-
-
-type InputFieldState = { 
-    value: string | string[]; // may need to change this as the app grows
-    error: string | null;
-    isDirty: boolean;
-};
-
-type InitialInputFieldState = Partial<InputFieldState> & { fieldId: string };
-
-type InputFieldStates = {
-    [fieldId: string]: InputFieldState;
-};
-
-type InputFieldsController = {
-    inputFieldStates: InputFieldStates;
-    updateInputFieldState: (fieldId: string, stateValue: Partial<InputFieldState>) => void;
-};
-
-const useInputFields = (inputFieldStates: InitialInputFieldState[]): InputFieldsController => {
-    const [ states, setStates ] = useState<InputFieldStates>(() => {
-        const temp: InputFieldStates = {};
-
-        for(const { fieldId, ...rest } of inputFieldStates){
-            temp[fieldId] = {
-                value: "",
-                error: null,
-                isDirty: false,
-                ...rest,
-            };
-        }
-
-        return temp;
-    });
-
-    const updateInputFieldState = (fieldId: string, stateValue: Partial<InputFieldState>): void => {
-        setStates(prevStates => {
-            return { 
-                ...prevStates,
-                [fieldId]: {
-                    ...prevStates[fieldId],
-                    ...stateValue,
-                },
-            }
-        });
-    }
-
-    return {
-        inputFieldStates: states,
-        updateInputFieldState,
-    };
-}
+import { useRef, useState, type RefObject } from "react"
+import { useInputFields, type InputFieldsController, type InitialInputFieldState, } from "./useInputFields.ts"
 
 
 type FormStatus<T> = 
@@ -60,24 +9,34 @@ type FormStatus<T> =
     | { status: "success"; data: T; }
     | { status: "error"; error: Error; }
 
-type FormController<T> = {
+type FormController<T, U> = {
     formStatus: FormStatus<T>;
     updateFormStatus: (newStatus: FormStatus<T>) => void;
-    inputFieldsController: InputFieldsController;
+    inputFieldsController: InputFieldsController<U>;
+    formRef: RefObject<HTMLFormElement | null>
+    scrollFormIntoView: (config?: ScrollIntoViewOptions) => void
 };
 
-export const useForm = <T,>(inputFieldStates: InitialInputFieldState[]): FormController<T> => {
+
+export const useForm = <T, U extends InitialInputFieldState>(inputFieldsProps: U[]): FormController<T, U> => {
     const [ formStatus, setFormStatus ] = useState<FormStatus<T>>({ status: "idle", });
-    const inputFieldsController = useInputFields(inputFieldStates);
+    const inputFieldsController = useInputFields<U>(inputFieldsProps);
+    const formRef = useRef<HTMLFormElement | null>(null);
 
     const updateFormStatus = (newStatus: FormStatus<T>): void => setFormStatus(newStatus);
 
-    const formController: FormController<T> = { 
+    const scrollFormIntoView = ({
+        behavior="smooth", block="start", inline="nearest",
+    }: ScrollIntoViewOptions = {}): void => {
+        formRef.current?.scrollIntoView({ behavior, block, inline, });
+    }
+
+    return { 
         formStatus,
         updateFormStatus,
+        scrollFormIntoView,
         inputFieldsController,
+        formRef,
     };
-
-    return formController;
 }
 
