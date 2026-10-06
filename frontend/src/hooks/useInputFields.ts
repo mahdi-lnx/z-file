@@ -16,7 +16,7 @@ export type InputFieldState = {
 
 export type InitialInputFieldState = PartialBy<InputFieldState, "value" | "error" | "isDirty">;
 
-type InputFieldStateUpdate = InitialInputFieldState;
+export type InputFieldStateUpdate = InitialInputFieldState;
 
 export type InputFieldStateUpdaterFn = (stateValue: InputFieldStateUpdate) => void;
 
