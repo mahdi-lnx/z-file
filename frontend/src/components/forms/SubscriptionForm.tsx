@@ -1,29 +1,32 @@
 
 import type { ReactElement } from "react"
 import { useForm } from "../../hooks/useForm.ts"
-import type { InitialInputFieldsProps } from "./InputField.types.ts"
 import { TextInputField, type TextInputFieldProps } from "./TextInputField.tsx"
 
 
 export const SubscriptionForm = (): ReactElement => {
 
-    const inputFieldProps: Array<InitialInputFieldsProps<TextInputFieldProps>> = [{
-        fieldId: "subscription-email",
-    }];
+    const { fieldControllers, } = useForm({
+        email: {},
+    });
 
-    const { inputFieldsController: {
-        inputFields,
-        updateInputFieldState,
-    }, } = useForm(inputFieldProps);
+    const inputFieldsProps: TextInputFieldProps[] = [
+        {
+            controller: fieldControllers.email,
+            inputProps: {
+                id: "email",
+            },
+        },
+    ];
 
     return (
-        <form onClick={(event) => {
+        <form onSubmit={(event) => {
             event.preventDefault();
         }}>
             <fieldset>
-                {inputFields.map(inputField => {
+                {inputFieldsProps.map(inputField => {
                     return (
-                        <TextInputField key={inputField.fieldId} {...inputField} updateInputFieldState={updateInputFieldState}/>
+                        <TextInputField key={inputField.inputProps?.id} {...inputField}/>
                     );
                 })}
             </fieldset>

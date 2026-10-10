@@ -9,22 +9,22 @@ import type { InputFieldStateUpdate } from "../../hooks/useInputFields.ts";
 
 
 export type TextInputFieldProps = {
-    type?: Extract<HTMLInputTypeAttribute, "text" | "tel" | "email" | "search">;
-    inputProps?: Omit<InputProps, "type" | "inputSize" | "isValid" | "isDirty" | "checked" | "defaultChecked">; // may need to add value and defaultValue
+    type?: Extract<HTMLInputTypeAttribute, "text" | "tel" | "email" | "search" | "password">;
     label?: string;
 } & BaseInputFieldProps; 
+
 
 /**
  * A High-level Input Field component meant for text inputs
  * Note: Consumers should use more specific input fields if available
  */
 export const TextInputField = ({ 
-    fieldId, error, isDirty, value, updateInputFieldState, inputProps={}, 
-    wrapperClassName, size="base", schema, type="text", label="", 
+    controller: { state: { value, isDirty, error }, updateState, }, 
+    inputProps={}, controlled=false, wrapperClassName, 
+    size="base", schema, type="text", label="", 
 }: TextInputFieldProps): ReactElement => {
 
-    const isControlled = Object.hasOwn(inputProps, "value");
-    const isValid = error !== null;
+    const isValid = error === null;
 
     let finalInput: InputProps = { 
         type,
@@ -35,9 +35,9 @@ export const TextInputField = ({
         onChange: (event: ChangeEvent<HTMLInputElement, HTMLInputElement>): void => {
             inputProps.onChange?.(event);
 
-            const newState: InputFieldStateUpdate = { fieldId };
+            const newState: InputFieldStateUpdate = {};
 
-            if(isControlled){
+            if(controlled){
                 newState.value = event.target.value;
             }
             if(isValid){
@@ -47,11 +47,11 @@ export const TextInputField = ({
                 newState.isDirty = true;
             }
 
-            Object.keys(newState).length > 1 && updateInputFieldState(newState);
+            Object.keys(newState).length > 0 && updateState(newState);
 
         },
         onBlur: (event: FocusEvent<HTMLInputElement, HTMLInputElement>) => {
-            inputProps.onChange?.(event);
+            inputProps.onBlur?.(event);
 
             const result = schema?.safeParse(event.target.value);
 
@@ -59,19 +59,24 @@ export const TextInputField = ({
                 return;
             } 
 
-            !result.success && updateInputFieldState({ fieldId, error: result.error.issues[0].message });
+            !result.success && updateState({ error: result.error.issues[0].message });
         },
     };
 
-    if(isControlled){
-        finalInput.value = value;
-    }
-    else if(Object.hasOwn(inputProps, "defaultValue")){
-        finalInput.defaultValue = value;
+    // if value is not a string
+    // fallback to default uncontrolled input
+
+    if(typeof value === "string"){
+        if(controlled){
+            finalInput.value = value;
+        }
+        else{
+            finalInput.defaultValue = value;
+        }
     }
 
     return (
-        <div id={fieldId} className={cn(
+        <div className={cn(
             wrapperClassName,
         )}>
             <InputLabel htmlFor={finalInput.id} size={size}>

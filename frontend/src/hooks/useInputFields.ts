@@ -6,57 +6,63 @@ import { useState } from "react"
 type PartialBy<T, U extends keyof T> = Omit<T, U> & Partial<Pick<T, U>>;
 type RequiredBy<T, U extends keyof T> = Required<Pick<T, U>> & Omit<T, U>;
 
-
-export type InputFieldState = { 
-    fieldId: string;
+type InputFieldState = {
     value: string | string[]; // may need to change this as the app grows
     error: string | null;
     isDirty: boolean;
 };
 
-export type InitialInputFieldState = PartialBy<InputFieldState, "value" | "error" | "isDirty">;
+type InputFieldStates<T> = Record<keyof T, InputFieldState>;
 
-export type InputFieldStateUpdate = InitialInputFieldState;
+type InitialInputFieldState = Partial<InputFieldState>;
 
-export type InputFieldStateUpdaterFn = (stateValue: InputFieldStateUpdate) => void;
+export type InputFieldStateUpdate = Partial<InputFieldState>;
 
-export type InputFieldsController<T> = {
-    inputFields: Array<T & InputFieldState>;
-    updateInputFieldState: InputFieldStateUpdaterFn;
+export type InitialInputFieldStates = Record<string, InitialInputFieldState>;
+
+export type InputFieldController = {
+    state: InputFieldState;
+    updateState: (newState: InputFieldStateUpdate) => void;
 };
 
+export type InputFieldControllers<T> = Record<keyof T, InputFieldController>;
 
+export const useInputFields = <T extends InitialInputFieldStates>(initialInputFields: T): InputFieldControllers<T> => {
+    const [ inputFieldStates, setInputFieldsStates ] = useState<InputFieldStates<T>>(() => {
+        const states = {} as InputFieldStates<T>;
 
-export const useInputFields = <T extends InitialInputFieldState>(initialInputFields: T[]): InputFieldsController<T> => {
-    const [ inputFields, setInputFields ] = useState<Array<T & InputFieldState>>(() => {
-        return initialInputFields.map(initialInputField => {
-            return {
+        for(const fieldId in initialInputFields){
+            states[fieldId] = {
                 value: "",
                 error: null,
                 isDirty: false,
-                ...initialInputField,
-            };
-        })
+                ...initialInputFields[fieldId],
+            }
+        }
 
+        return states;
     });
 
-    const updateInputFieldState = ({ fieldId, ...newState }: InputFieldStateUpdate): void => {
-        setInputFields(prevInputFields => {
-            const fieldIdIsValid = prevInputFields.find(prevInputField => prevInputField.fieldId === fieldId) !== undefined;
 
-            if(!fieldIdIsValid){
-                return prevInputFields;
+    const controllers = {} as InputFieldControllers<T>;
+
+    for(const fieldId in inputFieldStates){
+        controllers[fieldId] = {
+            state: inputFieldStates[fieldId],
+            updateState: (newState: Partial<InputFieldState>): void => {
+                setInputFieldsStates(prevInputFieldStates => {
+                    return {
+                        ...prevInputFieldStates,
+                        [fieldId]: {
+                            ...prevInputFieldStates[fieldId],
+                            ...newState,
+                        },
+                    };
+                });
             }
-
-            return prevInputFields.map(prevInputField => {
-                return prevInputField.fieldId === fieldId ? { ...prevInputField, ...newState } : prevInputField;
-            });
-        });
+        };
     }
 
-    return {
-        inputFields: inputFields,
-        updateInputFieldState,
-    };
+    return controllers;
 }
 

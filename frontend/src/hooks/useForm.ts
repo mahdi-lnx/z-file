@@ -1,6 +1,6 @@
 
 import { useRef, useState, type RefObject } from "react"
-import { useInputFields, type InputFieldsController, type InitialInputFieldState, } from "./useInputFields.ts"
+import { useInputFields, type InputFieldControllers, type InitialInputFieldStates, } from "./useInputFields.ts"
 
 
 type FormStatus<T> = 
@@ -12,15 +12,15 @@ type FormStatus<T> =
 type FormController<T, U> = {
     formStatus: FormStatus<T>;
     updateFormStatus: (newStatus: FormStatus<T>) => void;
-    inputFieldsController: InputFieldsController<U>;
+    fieldControllers: InputFieldControllers<U>;
     formRef: RefObject<HTMLFormElement | null>
     scrollFormIntoView: (config?: ScrollIntoViewOptions) => void
 };
 
 
-export const useForm = <T, U extends InitialInputFieldState>(inputFieldsProps: U[]): FormController<T, U> => {
+export const useForm = <T, U extends InitialInputFieldStates>(fieldStates: U): FormController<T, U> => {
     const [ formStatus, setFormStatus ] = useState<FormStatus<T>>({ status: "idle", });
-    const inputFieldsController = useInputFields<U>(inputFieldsProps);
+    const fieldControllers = useInputFields<U>(fieldStates);
     const formRef = useRef<HTMLFormElement | null>(null);
 
     const updateFormStatus = (newStatus: FormStatus<T>): void => setFormStatus(newStatus);
@@ -35,7 +35,7 @@ export const useForm = <T, U extends InitialInputFieldState>(inputFieldsProps: U
         formStatus,
         updateFormStatus,
         scrollFormIntoView,
-        inputFieldsController,
+        fieldControllers,
         formRef,
     };
 }
