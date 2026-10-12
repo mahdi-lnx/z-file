@@ -11,13 +11,14 @@ type SpinnerTones = {
 };
 
 type SpinnerSizes = {
+    "2xs": string;
     xs: string;
     sm: string;
     base: string;
     lg: string;
 };
 
-type SpinnerProps = {
+export type SpinnerProps = {
     tone?: keyof SpinnerTones;
     size?: keyof SpinnerSizes;
     children?: never;
@@ -44,6 +45,11 @@ export const Spinner = ({ size="sm", tone="auto", className, ...rest }: SpinnerP
     };
 
     const sizes: SpinnerSizes = {
+        "2xs": cn(
+            "w-20",
+            "h-20",
+            "border-3",
+        ),
         xs: cn(
             "w-30",
             "h-30",
