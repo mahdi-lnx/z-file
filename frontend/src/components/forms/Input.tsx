@@ -101,6 +101,7 @@ export const Input = ({
                 <input className={cn(
                     "outline-0",
                     "bg-transparent",
+                    "placeholder:italic",
                     // min-width of an input is by default auto,
                     // not allowing it to shrink as needed; hence, we
                     // set min-width to 0
@@ -121,6 +122,7 @@ export const Input = ({
             "focus-visible:border-accent",
             "disabled:cursor-not-allowed",
             "disabled:opacity-70",
+            "placeholder:italic",
             tone,
             selectedSize,
             selectedShape,
