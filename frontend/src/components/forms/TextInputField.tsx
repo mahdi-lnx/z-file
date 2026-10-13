@@ -11,6 +11,7 @@ import type { InputFieldStateUpdate } from "../../hooks/useInputFields.ts";
 export type TextInputFieldProps = {
     type?: Extract<HTMLInputTypeAttribute, "text" | "tel" | "email" | "search" | "password">;
     label?: string;
+    hideLabel?: boolean;
 } & BaseInputFieldProps; 
 
 
@@ -20,7 +21,7 @@ export type TextInputFieldProps = {
  */
 export const TextInputField = ({ 
     controller: { state: { value, isDirty, error }, updateState, }, 
-    inputProps={}, controlled=false, wrapperClassName, 
+    inputProps={}, controlled=false, wrapperClassName, hideLabel=false,
     size="base", schema, type="text", label="", 
 }: TextInputFieldProps): ReactElement => {
 
@@ -79,7 +80,9 @@ export const TextInputField = ({
         <div className={cn(
             wrapperClassName,
         )}>
-            <InputLabel htmlFor={finalInput.id} size={size}>
+            <InputLabel htmlFor={finalInput.id} size={size} className={cn(
+                hideLabel && "sr-only",
+            )}>
                 { label }
             </InputLabel>
 
