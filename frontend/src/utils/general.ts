@@ -1,6 +1,7 @@
 
 // This module provides general util functions
 
+import { twMerge } from "tailwind-merge"
 
 /**
  * Provides tailwind lsp capabilities when passing css classes,
@@ -20,6 +21,6 @@ export const cn = (...classNames: (string | false | undefined | null)[]): string
         finalClassName += className.trim() + " ";
     }
 
-    return finalClassName.trim();
+    return twMerge(finalClassName.trim());
 }
 
