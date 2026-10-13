@@ -19,6 +19,8 @@ export const SubscriptionForm = (): ReactElement => {
             controller: fieldControllers.email,
             inputProps: {
                 id: "email",
+                placeholder: "Your Email",
+                name: "email",
                 className: cn(
                     "pr-0",
                     "py-0",
