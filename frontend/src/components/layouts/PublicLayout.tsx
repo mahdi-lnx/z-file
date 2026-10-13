@@ -10,6 +10,7 @@ import { Heading } from "../typography/Heading.tsx"
 import { cn } from "../../utils/general.ts"
 import { useMatchMedia } from "../../hooks/useMatchMedia.ts"
 import { config } from "../../config.ts"
+import { SubscriptionForm } from "../forms/SubscriptionForm.tsx";
 
 
 export const PublicLayout = (): ReactElement => {
@@ -45,6 +46,7 @@ export const PublicLayout = (): ReactElement => {
             </AppHeader>
 
             <main>
+                <SubscriptionForm/>
                 <Outlet/>
             </main>
 
