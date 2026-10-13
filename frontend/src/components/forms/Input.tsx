@@ -91,7 +91,6 @@ export const Input = ({
                 "focus-visible:border-accent",
                 "has-disabled:cursor-not-allowed",
                 "has-disabled:opacity-70",
-                "has-disabled:pointer-events-none",
                 "flex",
                 tone,
                 selectedSize,
@@ -102,6 +101,7 @@ export const Input = ({
                     "outline-0",
                     "bg-transparent",
                     "placeholder:italic",
+                    "disabled:cursor-not-allowed",
                     // min-width of an input is by default auto,
                     // not allowing it to shrink as needed; hence, we
                     // set min-width to 0
