@@ -92,6 +92,7 @@ export const Input = ({
                 "has-disabled:cursor-not-allowed",
                 "has-disabled:opacity-70",
                 "has-disabled:pointer-events-none",
+                "flex",
                 tone,
                 selectedSize,
                 selectedShape,
@@ -100,6 +101,11 @@ export const Input = ({
                 <input className={cn(
                     "outline-0",
                     "bg-transparent",
+                    // min-width of an input is by default auto,
+                    // not allowing it to shrink as needed; hence, we
+                    // set min-width to 0
+                    "min-w-0",
+                    "grow",
                 )} {...props}/>
 
                 { endElement }
