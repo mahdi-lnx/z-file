@@ -17,6 +17,7 @@ export const SubscriptionForm = (): ReactElement => {
             label: "Your Email",
             hideLabel: true,
             controller: fieldControllers.email,
+            size: "lg",
             inputProps: {
                 id: "email",
                 placeholder: "Your Email",
@@ -27,7 +28,7 @@ export const SubscriptionForm = (): ReactElement => {
                 ),
                 shape: "pill",
                 endElement: (
-                    <LoadingButton shape="pill">
+                    <LoadingButton shape="pill" size="xl">
                         Subscribe
                     </LoadingButton>
                 ),
