@@ -16,9 +16,14 @@ export type BaseInputFieldProps = {
     schema?: z.ZodType; 
     inputProps?: Omit<
         InputProps, 
-        "type" | "inputSize" | "isValid" | "isDirty" | "checked" | "defaultChecked" | "value" | "defaultValue"
+        "type" | "inputSize" | "isValid" | "isDirty" | "checked" | "defaultChecked" | "value" | "defaultValue" | "className"
     >; 
-    wrapperClassName?: string;
+    className?: {
+        wrapper?: string;
+        input?: string;
+        label?: string;
+        error?: string;
+    };
     controlled?: boolean;
     controller: InputFieldController;
 };
