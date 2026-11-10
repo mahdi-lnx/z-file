@@ -41,7 +41,7 @@ export const TextInputField = ({
             if(controlled){
                 newState.value = event.target.value;
             }
-            if(isValid){
+            if(!isValid){
                 newState.error = null;
             }
             if(!isDirty){
