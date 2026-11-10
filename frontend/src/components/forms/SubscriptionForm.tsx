@@ -10,13 +10,13 @@ import * as z from "zod"
 
 export const SubscriptionForm = (): ReactElement => {
 
-    const { fieldControllers, } = useForm({
+    const { fieldControllers, setInputFieldErrors } = useForm({
         email: {},
     });
 
     const inputFieldsProps: TextInputFieldProps[] = [
         {
-            schema: subscriptionFormSchema.shape.email, // extract the email schema out of the subscriptionForm object schema
+            schema: subscriptionFormSchema.shape.email, // extract the email schema out of the subscriptionFormSchema object schema
             className: {
                 wrapper: cn( 
                     "flex",
@@ -60,14 +60,11 @@ export const SubscriptionForm = (): ReactElement => {
         if(!result.success){
             const { fieldErrors  } = z.flattenError(result.error);
 
-            for(const [ fieldId, [ errorMessage ] ] of Object.entries(fieldErrors)){
-                const controllerId = fieldId as keyof typeof fieldControllers;
-                fieldControllers[controllerId].updateState({ error: errorMessage })
-            }
+            setInputFieldErrors({ fieldErrors, })
 
-            return
+            return;
         }
-        
+
         // TODO: submit the resposne to the server
     }
 
