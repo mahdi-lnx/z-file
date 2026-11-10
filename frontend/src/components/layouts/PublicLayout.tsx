@@ -6,10 +6,11 @@ import { AppHeader } from "../headers/AppHeader.tsx"
 import { MobileNavDrawer } from "../navigations/MobileNavDrawer.tsx"
 import { TopNavBar } from "../navigations/TopNavBar.tsx"
 import { AppFooter } from "../footers/AppFooter.tsx"
+import { Heading } from "../typography/Heading.tsx"
 import { cn } from "../../utils/general.ts"
 import { useMatchMedia } from "../../hooks/useMatchMedia.ts"
-import { config } from "../../config.ts";
-import { Heading } from "../typography/Heading.tsx";
+import { config } from "../../config.ts"
+import { SubscriptionForm } from "../forms/SubscriptionForm.tsx"
 
 
 export const PublicLayout = (): ReactElement => {
@@ -56,7 +57,12 @@ export const PublicLayout = (): ReactElement => {
                     "md:grid-cols-[1fr_1fr]",
                     "gap-27"
                 )}>
-                    <div>
+                    <div className={cn(
+                        "flex",
+                        "flex-col",
+                        "md:items-center",
+                        "gap-15"
+                    )}>
                         <Heading as="h2" variant="section" className={cn(
                             "mb-9",
                             "capitalize",
@@ -64,12 +70,17 @@ export const PublicLayout = (): ReactElement => {
                         )}>
                             Subscribe to our mailing list!
                         </Heading>
+
+                        <SubscriptionForm/>
                     </div>
 
-                    <div>
+                    <div className={cn(
+                        "flex",
+                        "flex-col",
+                        "gap-9",
+                    )}>
                         <Heading as="h2" variant="section" className={cn(
-                            "mb-9",
-                            "md:text-center",
+                            "md:self-center",
                         )}>
                             Contact
                         </Heading>
