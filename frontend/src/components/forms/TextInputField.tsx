@@ -21,8 +21,8 @@ export type TextInputFieldProps = {
  */
 export const TextInputField = ({ 
     controller: { state: { value, isDirty, error }, updateState, }, 
-    inputProps={}, controlled=false, wrapperClassName, hideLabel=false,
-    size="base", schema, type="text", label="", 
+    inputProps={}, controlled=false, hideLabel=false, size="base", 
+    schema, type="text", label="", className={}
 }: TextInputFieldProps): ReactElement => {
 
     const isValid = error === null;
@@ -78,17 +78,18 @@ export const TextInputField = ({
 
     return (
         <div className={cn(
-            wrapperClassName,
+            className.wrapper,
         )}>
             <InputLabel htmlFor={finalInput.id} size={size} className={cn(
                 hideLabel && "sr-only",
+                className.label,
             )}>
                 { label }
             </InputLabel>
 
-            <Input {...finalInput}/>
+            <Input {...finalInput} className={className.input}/>
 
-            <InputError size={size}>
+            <InputError size={size} className={className.error}>
                 { error }
             </InputError>
         </div>
