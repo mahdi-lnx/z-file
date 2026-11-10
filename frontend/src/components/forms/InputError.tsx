@@ -35,6 +35,8 @@ export const InputError = ({
     return (
         <p className={cn(
             selectedSize,
+            "text-danger",
+            "font-medium",
             className,
         )} {...props}>
             { children }
