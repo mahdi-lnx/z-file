@@ -21,7 +21,8 @@
 
     /*z-scales*/
     --z-app-header: 10;
-    --z-mobile-nav-drawer: 20;
+    --z-notification: 20;
+    --z-mobile-nav-drawer: 30;
 }
 
 
@@ -37,7 +38,25 @@
     --spacing: 1px;
 
     --breakpoint-2xs: 25rem; /*400px*/
-    --breakpoint-xs: 31.25rem /*500px*/
+    --breakpoint-xs: 31.25rem; /*500px*/
+
+    /*notification animations*/
+    --animate-notification-open: notification-open 700ms ease-in-out;
+    --animate-notification-close: notification-close 700ms ease-in-out;
+
+    @keyframes notification-open{
+        from{
+            translate: 0 -100%;
+            opacity: 0;
+        }
+    }
+
+    @keyframes notification-close{
+        to{
+            opacity: 0;
+            display: none;
+        }
+    }
 }
 
 
