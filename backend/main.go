@@ -1,0 +1,17 @@
+package main
+
+import (
+	"net/http"
+)
+
+func main() {
+
+	mux := http.NewServeMux()
+
+	server := http.Server{
+		Addr:    "127.0.0.1:3000",
+		Handler: mux,
+	}
+
+	server.ListenAndServe()
+}
