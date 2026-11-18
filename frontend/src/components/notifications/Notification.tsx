@@ -3,7 +3,7 @@ import { useState, type ReactElement, type ReactNode } from "react"
 import { cn } from "../../utils/general"
 import { HamburgerButton } from "../buttons/HamburgerButton"
 
-type NotificationTones = {
+export type NotificationTones = {
     info: string;
     success: string;
     warning: string;
