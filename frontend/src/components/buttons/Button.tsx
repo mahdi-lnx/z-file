@@ -12,6 +12,7 @@ type ButtonVariants = {
 };
 
 export type ButtonSizes = {
+    xs: string;
     sm: string;
     base: string;
     lg: string;
@@ -87,6 +88,7 @@ export const Button = ({
     }
 
     const sizes: ButtonSizes = {
+        xs: cn("py-4 px-7 text-xs"),
         sm: cn("py-4 px-7 text-sm"),
         base: cn("py-4 px-7 text-base"),
         lg: cn("py-5 px-8 text-lg"),
