@@ -8,9 +8,10 @@ type HamburgerButtonTones = {
     auto: string;
     light: string;
     dark: string;
+    mist: string;
 };
 
-type HamburgerButtonSizes = Pick<ButtonSizes, "sm" | "base" | "lg">;
+type HamburgerButtonSizes = Pick<ButtonSizes, "xs" | "sm" | "base" | "lg">;
 
 export type HamburgerButtonProps = {
     isOpen?: boolean;
@@ -31,9 +32,17 @@ export const HamburgerButton = ({
         ),
         light: cn("bg-light"),
         dark: cn("bg-dark"),
+        mist: cn("bg-mist-400")
     };
 
     const sizes: HamburgerButtonSizes = {
+        xs: cn(
+            "w-24",
+            "h-4",
+            isOpen && "first:rotate-45",
+            isOpen && "first:translate-y-18",
+            isOpen && "last:-rotate-45",
+        ),
         sm: cn(
             "w-30",
             "h-5",
