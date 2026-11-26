@@ -107,3 +107,7 @@ A generic, type-safe form management abstraction built using custom React hooks 
 - [ ] Subscription and tier-based feature access
 - [ ] Comprehensive testing
 - [ ] Production deployment
+
+## License
+
+Z-File is licensed under the GNU Affero General Public License v3.0. See the [LICENSE](LICENSE) file for the full license text.
